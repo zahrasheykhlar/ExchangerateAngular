@@ -1,0 +1,77 @@
+
+
+<input type="hidden" #base>
+<input type="hidden" #symbol>
+
+<div [ngSwitch]="sselection">
+<div *ngSwitchCase="'hideChart'" class="row">
+<form [formGroup]="baseFormm" (ngSubmit)="onSubmit()">
+  <div class="col-md-6">
+  <select formControlName="base" class="form-control" >
+    <option>Choose base currency</option>
+    <option *ngFor="let base of bases" [selected]= "base == selectedBase" >{{base}}</option>
+  </select>
+  </div>
+  <div class="col-md-6">
+  <button class="btn btn-default">Show latest rates</button>
+  </div>
+</form>
+
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Currency</th>
+    <th scope="col">Spot</th>
+    <th scope="col">Increase/Decrease</th>
+    <th scope="col">Chart</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of rates  | keyvalue; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>
+      {{ item.key }}
+    </td>
+    <td>{{ item.value | number }}</td>
+    <td>
+      <!-- child component for increase/decrease icons-->
+      <app-increase-decrease
+        [base]="this.baseFormm.value.base"
+        [symbol]="item.key">
+      </app-increase-decrease>
+
+    </td>
+    <td>
+        <button class="btn btn-default" (click)="sselection = 'showChart'; symbol.value = item.key; base.value = baseFormm.value.base ">
+          <mat-icon>bar_chart</mat-icon>
+        </button>
+
+    </td>
+  </tr>
+  </tbody>
+</table>
+</div>
+  <div *ngSwitchCase="'showChart'">
+    <button class="btn btn-block" (click)="sselection = 'hideChart'" >
+      back
+    </button>
+    <app-last-thirty-days [selectedBase]="base.value"
+                          [selectedSymbol]="symbol.value">
+    </app-last-thirty-days></div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

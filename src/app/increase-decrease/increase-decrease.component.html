@@ -1,0 +1,15 @@
+
+<!-- no change-->
+<div *ngIf="change == 0">
+  <mat-icon color="primary">drag_handle</mat-icon>
+</div>
+
+<!-- upward-->
+<div *ngIf="change > 0 ">
+  <mat-icon class="green-icon">arrow_upward</mat-icon>
+</div>
+
+<!-- ldownward -->
+<div *ngIf="change < 0">
+  <mat-icon color="warn">arrow_downward</mat-icon></div>
+

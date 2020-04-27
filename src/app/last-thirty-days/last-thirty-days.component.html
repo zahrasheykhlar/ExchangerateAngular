@@ -1,0 +1,32 @@
+<!--<p>last-thirty-days works!</p>-->
+<div class="row">
+
+<form [formGroup]="baseForm" (ngSubmit)="onSubmit()">
+  <div class="col-md-5">
+  <select formControlName="base" class="form-control">
+    <option>Choose base currency</option>
+    <option *ngFor="let base of bases" [selected]=" base == selectedBase"  >{{base}}</option>
+  </select>
+  </div>
+  <div class="col-md-5">
+    <select formControlName="symbol" class="form-control">
+      <option>Choose symbol currency</option>
+      <option *ngFor="let symbol of bases" [selected]=" symbol == selectedSymbol"  >{{symbol}}</option>
+    </select>
+  </div>
+  <div class="col-md-2">
+  <button class="btn btn-default">Chart</button>
+</div>
+
+</form>
+</div>
+<div class="row">
+  <div style="text-align:center">
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [xaxis]="chartOptions.xaxis"
+      [title]="chartOptions.title">
+    </apx-chart>
+  </div>
+</div>

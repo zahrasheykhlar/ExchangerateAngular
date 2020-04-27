@@ -1,0 +1,40 @@
+<!--<p>top-five works!</p>-->
+<div class="row">
+  <form [formGroup]="baseForm">
+    <div class="col-md-5">
+      <select formControlName="base" class="form-control">s
+        <option>Choose base currency</option>
+        <option *ngFor="let base of bases" >{{base}}</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-default" value="increase" (click)="onSubmit('increase')">Increase</button>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-default" value="decrease"  (click)="onSubmit('decrease')">Decrease</button>
+    </div>
+  </form>
+</div>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Currency</th>
+    <th scope="col">Difference</th>
+    <th scope="col">%</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of topFive; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>
+      {{ item[0] }}
+    </td>
+    <td>{{ item[1]}}</td>
+    <td>
+      {{ item[2]}} %
+    </td>
+  </tr>
+  </tbody>
+</table>
