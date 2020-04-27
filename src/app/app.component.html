@@ -354,7 +354,7 @@ Documentation<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 
   <!-- Terminal -->
   <div class="terminal" [ngSwitch]="selection.value">
-      <pre *ngSwitchDefault><app-latest-rates [sselection]="'hideChart'"></app-latest-rates></pre>
+      <pre *ngSwitchDefault><app-latest-rates></app-latest-rates></pre>
       <pre *ngSwitchCase="'last30Days'"><app-last-thirty-days></app-last-thirty-days></pre>
       <pre *ngSwitchCase="'top5'"><app-top-five></app-top-five></pre>
   </div>

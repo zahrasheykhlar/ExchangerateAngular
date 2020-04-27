@@ -8,7 +8,7 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./latest-rates.component.css'],
 })
 export class LatestRatesComponent implements OnInit{
-  @Input() sselection: string;
+  // @Input() sselection: string;
   baseFormm = this.fb.group({
     base: ['']
   });
@@ -19,12 +19,12 @@ export class LatestRatesComponent implements OnInit{
   }
   ngOnInit() {
     this.apiService.getLatestRates().subscribe((data) => {
-      this.rates = data.rates;
+       this.rates = data.rates;
     });
   }
   onSubmit() {
     this.apiService.getLatestRatesByBase(this.baseFormm.value.base).subscribe((data) => {
-      this.rates = data.rates;
+       this.rates = data.rates;
     });
   }
 

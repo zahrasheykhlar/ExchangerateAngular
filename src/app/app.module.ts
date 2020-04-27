@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import { InputUserDataFormComponent } from './input-user-data-form/input-user-data-form.component';
 import { LatestRatesComponent } from './latest-rates/latest-rates.component';
 import { LastThirtyDaysComponent } from './last-thirty-days/last-thirty-days.component';
 import { TopFiveComponent } from './top-five/top-five.component';
@@ -16,12 +15,12 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { IncreaseDecreaseComponent } from './increase-decrease/increase-decrease.component';
 import { TopIncreaseComponent } from './top-increase/top-increase.component';
 import { TopDecreaseComponent } from './top-decrease/top-decrease.component';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    InputUserDataFormComponent,
     LatestRatesComponent,
     LastThirtyDaysComponent,
     TopFiveComponent,
@@ -37,7 +36,8 @@ import { TopDecreaseComponent } from './top-decrease/top-decrease.component';
     MatTableModule,
     HttpClientModule,
     MatIconModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

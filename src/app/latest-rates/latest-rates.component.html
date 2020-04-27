@@ -2,9 +2,10 @@
 
 <input type="hidden" #base>
 <input type="hidden" #symbol>
+<input type="hidden" #sselection>
 
-<div [ngSwitch]="sselection">
-<div *ngSwitchCase="'hideChart'" class="row">
+<div [ngSwitch]="sselection" style="margin: 20px;">
+<div *ngSwitchDefault class="row">
 <form [formGroup]="baseFormm" (ngSubmit)="onSubmit()">
   <div class="col-md-6">
   <select formControlName="base" class="form-control" >
@@ -16,8 +17,6 @@
   <button class="btn btn-default">Show latest rates</button>
   </div>
 </form>
-
-
 <table class="table table-striped">
   <thead>
   <tr>
@@ -44,7 +43,7 @@
 
     </td>
     <td>
-        <button class="btn btn-default" (click)="sselection = 'showChart'; symbol.value = item.key; base.value = baseFormm.value.base ">
+        <button class="btn btn-default" (click)="sselection.value = 'showChart'; symbol.value = item.key; base.value = baseFormm.value.base ">
           <mat-icon>bar_chart</mat-icon>
         </button>
 
@@ -53,8 +52,9 @@
   </tbody>
 </table>
 </div>
-  <div *ngSwitchCase="'showChart'">
-    <button class="btn btn-block" (click)="sselection = 'hideChart'" >
+
+<div *ngSwitchCase="'showChart'">
+    <button class="btn btn-block" (click)="sselection.value = 'hideChart'" >
       back
     </button>
     <app-last-thirty-days [selectedBase]="base.value"
