@@ -1,12 +1,12 @@
 
 
-<input type="hidden" #base>
-<input type="hidden" #symbol>
-<input type="hidden" #sselection>
+<input type="" #base>
+<input type="" #symbol>
+<input type="" #selection>
 
-<div [ngSwitch]="sselection" style="margin: 20px;">
+<div [ngSwitch]="selection.value" style="margin: 20px;">
 <div *ngSwitchDefault class="row">
-<form [formGroup]="baseFormm" (ngSubmit)="onSubmit()">
+<form [formGroup]="baseForm" (ngSubmit)="onSubmit()">
   <div class="col-md-6">
   <select formControlName="base" class="form-control" >
     <option>Choose base currency</option>
@@ -37,13 +37,14 @@
     <td>
       <!-- child component for increase/decrease icons-->
       <app-increase-decrease
-        [base]="this.baseFormm.value.base"
+        [base]="this.baseForm.value.base"
         [symbol]="item.key">
       </app-increase-decrease>
 
     </td>
     <td>
-        <button class="btn btn-default" (click)="sselection.value = 'showChart'; symbol.value = item.key; base.value = baseFormm.value.base ">
+      <input value={{item.key}}>
+        <button class="btn btn-default" (click)="selection.value = 'showChart'; symbol.value = item.key; base.value = baseForm.value.base; selectedBase =  baseForm.value.base; selectedSymbol = item.key ">
           <mat-icon>bar_chart</mat-icon>
         </button>
 
@@ -54,12 +55,13 @@
 </div>
 
 <div *ngSwitchCase="'showChart'">
-    <button class="btn btn-block" (click)="sselection.value = 'hideChart'" >
+    <button class="btn btn-block" (click)="selection.value = 'hideChart'" >
       back
     </button>
-    <app-last-thirty-days [selectedBase]="base.value"
-                          [selectedSymbol]="symbol.value">
-    </app-last-thirty-days></div>
+    <app-last-thirty-days [selectedBase]= "symbol.value"
+                          [selectedSymbol]= 'selectedSymbol' >
+    </app-last-thirty-days>
+</div>
 
 </div>
 

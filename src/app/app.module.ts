@@ -13,8 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatIconModule} from '@angular/material/icon';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { IncreaseDecreaseComponent } from './increase-decrease/increase-decrease.component';
-import { TopIncreaseComponent } from './top-increase/top-increase.component';
-import { TopDecreaseComponent } from './top-decrease/top-decrease.component';
+
 import { CommonModule } from '@angular/common';
 
 
@@ -24,9 +23,7 @@ import { CommonModule } from '@angular/common';
     LatestRatesComponent,
     LastThirtyDaysComponent,
     TopFiveComponent,
-    IncreaseDecreaseComponent,
-    TopIncreaseComponent,
-    TopDecreaseComponent
+    IncreaseDecreaseComponent
   ],
   imports: [
     BrowserModule,

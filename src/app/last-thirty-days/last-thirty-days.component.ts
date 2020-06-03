@@ -9,7 +9,11 @@ import {
   ApexXAxis,
   ApexTitleSubtitle
 } from 'ng-apexcharts';
-
+class RateModel {
+  rates: [] ;
+  base: string;
+  date: string;
+}
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -25,7 +29,7 @@ export type ChartOptions = {
 export class LastThirtyDaysComponent implements OnInit {
   @Input() selectedBase: string;
   @Input() selectedSymbol: string;
-  baseForm = this.fb.group({
+  baseFormm = this.fb.group({
     base: [''],
     symbol: ['']
   });
@@ -37,15 +41,17 @@ export class LastThirtyDaysComponent implements OnInit {
   public chartOptions: Partial<any>;
 
   onSubmit() {
-    this.apiService.getLastThirtyDaysByBaseSymbol(this.baseForm.value.base, this.baseForm.value.symbol).subscribe((data) => {
-
-      for (let key in data.rates) {
-        let value = data.rates[key];
+    this.apiService.getLastThirtyDaysByBaseSymbol(this.baseFormm.value.base, this.baseFormm.value.symbol).subscribe((data) => {
+      let rateModel = new RateModel();
+      rateModel = JSON.parse(JSON.stringify(data));
+      this.rates = rateModel.rates;
+      // tslint:disable-next-line:forin
+      for (const key in rateModel.rates) {
+        // let value = rateModel.rates[key];
         this.categories.push(key);
-        let [currency, exchange] = Object.entries(data.rates[key])[0];
+        const [currency, exchange] = Object.entries(rateModel.rates[key])[0];
         this.rates.push(exchange);
       }
-      console.log(this.rates);
       this.chartOptions = {
         series: [
           {
@@ -58,7 +64,7 @@ export class LastThirtyDaysComponent implements OnInit {
           type: 'bar'
         },
         title: {
-          text: 'Last 30 days for ' + this.oppoSuitsForm.value.symbol + ' from ' + this.oppoSuitsForm.value.base
+          text: 'Last 30 days for ' + this.baseFormm.value.symbol + ' from ' + this.baseFormm.value.base
           // + data.rates[0].name + ' from ' + data.base
         },
         xaxis: {
@@ -71,13 +77,23 @@ export class LastThirtyDaysComponent implements OnInit {
 
   }
   constructor(public fb: FormBuilder, private apiService: ApiService) {
-    this.selectedSymbol = 'AUD';
-    this.selectedBase = 'EUR';
+    // tslint:disable-next-line:triple-equals
+    alert(this.selectedBase);
+    alert(this.selectedSymbol);
+    if (this.selectedBase === undefined || this.selectedSymbol === undefined)
+    {
+      this.selectedSymbol = 'AUD';
+      this.selectedBase = 'EUR';
+    }
     this.apiService.getLastThirtyDaysByBaseSymbol(this.selectedBase, this.selectedSymbol).subscribe((data) => {
-      for (let key in data.rates) {
-        let value = data.rates[key];
+      let rateModel = new RateModel();
+      rateModel = JSON.parse(JSON.stringify(data));
+      this.rates = rateModel.rates;
+      // tslint:disable-next-line:forin
+      for (const key in rateModel.rates) {
+        // let value = rateModel.rates[key];
         this.categories.push(key);
-        let [currency, exchange] = Object.entries(data.rates[key])[0];
+        const [currency, exchange] = Object.entries(rateModel.rates[key])[0];
         this.rates.push(exchange);
       }
       this.chartOptions = {
